@@ -81,6 +81,18 @@ module.exports = {
 	, tasks: {
 		'百科首页': {
 			url: 'http://www.baike.com'
+			/*
+			, method: 'POST'
+			, headers: {
+				referer: ''
+				, 'X-Requested-With': 'XMLHttpRequest'
+				, cookie: true
+			}
+			, form: {
+				key: 'value'
+			},
+			include: 'substr'
+			*/
 		}
 	}
 }
