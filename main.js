@@ -30,8 +30,6 @@ function check() {
 	var tasks = require('./tasks/'+task)
 	//console.log(tasks)
 	
-	var sendmail = require('./mail')(config.smtp, tasks.mailOptions)
-	
 	if (tasks.login) {
 	
 		worker.login(tasks, function() {
@@ -44,7 +42,7 @@ function check() {
 }
 
 function start(tasks) {
-	
+	var sendmail = require('./mail')(config.smtp, tasks.mailOptions)
 	worker.init(tasks)
 	worker.exec(function(result) {
 		var subject = tasks.mailOptions.subject
