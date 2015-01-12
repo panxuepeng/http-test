@@ -1,0 +1,24 @@
+{
+  "name": "request-test",
+  "title": "网页检测",
+  "description": "",
+  "version": "0.0.1",
+  "private": false,
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  },
+  "dependencies": {
+    "request": "latest",
+    "minimist": "latest",
+    "json-format": "latest",
+    "underscore": "latest",
+    "async": "latest",
+    "dateformat": "latest",
+    "nodemailer": "latest",
+    "nodemailer-smtp-transport": "latest"
+  },
+  "devDependencies": {
+    "nodemon": "latest"
+  }
+}
