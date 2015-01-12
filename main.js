@@ -42,23 +42,26 @@ function check() {
 }
 
 function start(tasks) {
-	var sendmail = require('./mail')(config.smtp, tasks.mailOptions)
+	
 	worker.init(tasks)
 	worker.exec(function(result) {
+		var sendmail = require('./mail')(config.smtp, tasks.mailOptions)
 		var subject = tasks.mailOptions.subject
+		var _subject
+		
 		if ( result.exception.length || result.error.length ) {
-			subject += '（异常）'
+			_subject = subject+'（异常）'
 		} else {
-			subject += '（正常）'
+			_subject = subject+'（正常）'
 		}
 		
 		var content = jsonFormat(result)
 		content = content.replace(/\t/g, '　')
 		
 		if (argv.sendmail) {
-			sendmail(subject, content)
+			sendmail(_subject, content)
 		}
 		
-		console.log(subject)
+		console.log(_subject)
 	})
 }
