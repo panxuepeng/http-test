@@ -13,6 +13,7 @@
     "minimist": "latest",
     "json-format": "latest",
     "underscore": "latest",
+	"deep-extend": "latest",
     "async": "latest",
     "dateformat": "latest",
     "nodemailer": "latest",

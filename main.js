@@ -11,6 +11,11 @@ console.log(argv)
 var timeout = argv.timeout || 0
 var task = argv.task || 'default'
 
+// 此时间段之内进行检查并发送email
+// >=8 && <=20
+var hours = argv.hours || '8,20'
+hours = hours.split(',')
+
 check()
 if (timeout) {
 	setInterval(function() {
@@ -21,7 +26,6 @@ if (timeout) {
 function check() {
 	var d = new Date
 	var h = d.getHours()
-	var hours = config.hours
 	
 	if ( h < hours[0] || h > hours[1] ) {
 		return console.log('休息中...')
@@ -45,23 +49,22 @@ function start(tasks) {
 	
 	worker.init(tasks)
 	worker.exec(function(result) {
-		var sendmail = require('./mail')(config.smtp, tasks.mailOptions)
-		var subject = tasks.mailOptions.subject
-		var _subject
+		var sendmail = require('./mail')(config.smtp)
+		var options = deepExtend({}, tasks.mailOptions)
 		
 		if ( result.exception.length || result.error.length ) {
-			_subject = subject+'（异常）'
+			options.subject += '（异常）'
 		} else {
-			_subject = subject+'（正常）'
+			options.subject += '（正常）'
 		}
 		
 		var content = jsonFormat(result)
-		content = content.replace(/\t/g, '　')
+		options.text = content.replace(/\t/g, '　')
 		
 		if (argv.sendmail) {
-			sendmail(_subject, content)
+			sendmail(options)
 		}
 		
-		console.log(_subject)
+		console.log(subject)
 	})
 }

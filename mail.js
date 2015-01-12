@@ -1,13 +1,12 @@
 var nodemailer = require('nodemailer')
 var smtpTransport = require('nodemailer-smtp-transport')
 var transporter
-var mailOptions
+var smtp
 
 // send mail with defined transport object
 
-var send = function(subject, content) {
-	mailOptions.subject = subject
-	mailOptions.text = content
+var send = function(mailOptions) {
+	transporter = nodemailer.createTransport(smtpTransport(smtp))
 	
 	transporter.sendMail(mailOptions, function(error, info) {
 		if (error) {
@@ -18,9 +17,8 @@ var send = function(subject, content) {
 	})
 }
 
-module.exports = function(smtp, options) {
-	mailOptions = options
-	transporter = nodemailer.createTransport(smtpTransport(smtp))
+module.exports = function(_smtp) {
+	smtp = _smtp	
 	
 	return send
 }
