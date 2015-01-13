@@ -81,21 +81,35 @@ module.exports = {
 		async.series([
 			function(cb) {
 				request(tasks.login.get, function(err, res, body) {
-					tasks.login.get_callback(res, body)
-					cb(null, 'ok')
+					if (err) {
+						cb(err)
+					} else {
+						tasks.login.get_callback(res, body)
+						cb(null, 'ok')
+					}
+					
 				})
 			},
 			function(cb) {
 				request(tasks.login.post, function(err, res, body) {
-					tasks.login.post_callback(res, body)
-					cb(null, 'ok')
+					if (err) {
+						cb(err)
+					} else {
+						tasks.login.post_callback(res, body)
+						cb(null, 'ok')
+					}
 				})
 			}
 		],
 		// optional callback
 		function(err, results) {
-			console.log('tasks.cookie', tasks.cookie)
-			callback()
+			if ( err ) {
+				console.log('登录失败')
+			} else {
+				console.log('tasks.cookie', tasks.cookie)
+				
+			}
+			callback(err)
 		})
 
 		

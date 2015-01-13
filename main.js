@@ -37,8 +37,24 @@ function check() {
 	
 	if (tasks.login) {
 	
-		worker.login(tasks, function() {
-			start(tasks)
+		worker.login(tasks, function(err) {
+			if (err) {
+				var sendmail = require('./mail')(config.smtp)
+				var options = deepExtend({}, tasks.mailOptions)
+				
+				var content = jsonFormat(err)
+				options.text = content.replace(/\t/g, '　')
+		
+				options.subject += '（登录失败）'
+				
+				if (argv.sendmail) {
+					sendmail(options)
+				} else {
+					console.log(err)
+				}
+			} else {
+				start(tasks)
+			}
 		})
 		
 	} else {

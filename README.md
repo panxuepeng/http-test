@@ -12,7 +12,7 @@ Http-test
 ### 一次测试
 node main
 
-### 定时测试
+### 定时测试，并发送邮件
 
 	node main --timeout=600
 	node main --timeout=3600 --sendmail --task=default
