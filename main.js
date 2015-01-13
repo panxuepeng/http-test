@@ -1,6 +1,7 @@
 var worker = require('./worker')
 var _ = require('underscore')
 var minimist = require('minimist')
+var deepExtend = require('deep-extend')
 var jsonFormat = require('json-format')
 var config = require('./config')
 var argv = require('minimist')(process.argv.slice(2))
@@ -65,6 +66,6 @@ function start(tasks) {
 			sendmail(options)
 		}
 		
-		console.log(subject)
+		console.log(options.subject, options.to)
 	})
 }

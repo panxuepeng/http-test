@@ -15,6 +15,7 @@ node main
 ### 定时测试
 
 	node main --timeout=600
+	node main --timeout=3600 --sendmail --task=default
 	timeout 单位是秒
 	
 ## 测试结果
