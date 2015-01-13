@@ -72,7 +72,7 @@ module.exports = {
 				// 保存登录 cookie sso_access_token
 				if ( _cookie.substr(0, 16) === 'sso_access_token' ) {
 					console.log('登录成功')
-					exports.cookie.push(_cookie)
+					exports.cookie = [_cookie]
 				}
 			})
 		},
