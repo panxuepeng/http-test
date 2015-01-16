@@ -141,15 +141,12 @@ module.exports = {
 	result: function() {
 		return result
 	},
-	reset: function() {
+	exec: function(cb) {
 		result = {
 			exception: [],
 			error: [],
 			success: []
 		}
-	},
-	exec: function(cb) {
-		this.reset()
 		
 		async.parallelLimit(tasks, 10, function(err, output) {
 			console.log(output)

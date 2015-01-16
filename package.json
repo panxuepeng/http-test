@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "request": "latest",
+    "shelljs": "latest",
     "minimist": "latest",
     "json-format": "latest",
     "underscore": "latest",
