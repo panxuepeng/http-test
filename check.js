@@ -9,7 +9,15 @@ var argv = require('minimist')(process.argv.slice(2))
 
 var task = argv.task || 'default'
 
+// 时间间隔，单位：秒，默认0(一次性检查)
+var timeout = argv.timeout || 0
+
 check()
+if (timeout) {
+	setInterval(function() {
+		check()
+	}, timeout*1000)
+}
 
 function check() {
 	var tasks = require('./tasks/'+task)
