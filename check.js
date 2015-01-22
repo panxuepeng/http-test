@@ -25,7 +25,7 @@ function check() {
 	
 	if (tasks.login) {
 	
-		worker.login(tasks, function(err) {
+		worker.login(tasks, function(err, results) {
 			if (err) {
 				var sendmail = require('./mail')(config.smtp)
 				var options = deepExtend({}, tasks.mailOptions)
